@@ -1,5 +1,6 @@
 package com.enoca.ulku.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,6 +14,7 @@ import com.enoca.ulku.business.requests.companyRequest.UpdateCompanyRequest;
 import com.enoca.ulku.business.responses.companyResponse.GetAllCompaniesResponse;
 import com.enoca.ulku.business.responses.companyResponse.UpdateCompanyResponse;
 import com.enoca.ulku.dataAccess.CompanyRepository;
+import com.enoca.ulku.entities.concretes.Company;
 
 @Service
 public class CompanyManager implements CompanyService{
@@ -30,16 +32,25 @@ public class CompanyManager implements CompanyService{
 
 	@Override
 	public List<GetAllCompaniesResponse> getAll() {
+		List<Company> companies = companyRepository.findAll();
+		List<GetAllCompaniesResponse> companiesResponse = new ArrayList<GetAllCompaniesResponse>();
+
+		for (Company company : companies) {
+			GetAllCompaniesResponse ResponseItem = new GetAllCompaniesResponse();
+			ResponseItem.setId(company.getId());
+			ResponseItem.setName(company.getName());
+			companiesResponse.add(ResponseItem); 
+		}
 		
-		
-		
-		return 	null;
+		return 	companiesResponse;
 	}
 
 
 	@Override
 	public void add(CreateCompanyRequest createCompanyRequest) {
-		// TODO Auto-generated method stub
+		Company company = new Company();
+		company.setName(createCompanyRequest.getName());
+		this.companyRepository.save(company);
 		
 	}
 
