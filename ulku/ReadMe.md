@@ -1,20 +1,20 @@
 # Enoca Task
 
-###Gereksinimler
-*java17 
-*Eclipse 
-###Database
-*Postgresql
-###Libraries
-*Lombok 
-*Validation
-###dependency
-*Spring Boot DevTools 
-*Lombok
-*Spring Web 
-*Spring Data JPA 
-*PostgreSQL Driver
-*Validation
+### Gereksinimler
+* java17 
+* Eclipse 
+### Database
+* Postgresql
+### Libraries
+* Lombok 
+* Validation
+### dependency
+* Spring Boot DevTools 
+* Lombok
+* Spring Web 
+* Spring Data JPA 
+* PostgreSQL Driver
+* Validation
 
 
 ### Reference Documentation
