@@ -13,6 +13,9 @@ Bir web sayfasında ekran sürekli Backend’ den veya bir başka yapı tarafın
 güncelleniyor. Siz, web sayfasını refresh etmeden bu güncel bilgiyi anlık ekrana nasıl 
 yansıtırsınız.
 ********************************************************
+*html ve js kodlarıyla sağlayabiliriz.
+*
+*
 Java Server Pages’de otomatik yenileme işlemi aşağıdaki kod bloğu ile olmakta.
 <%response.setIntHeader("Refresh", 1);  %>
 Otomatik yenileme kodundaki rakam saniye cinsinden otomatik yenileme süresini belirlemektedir.

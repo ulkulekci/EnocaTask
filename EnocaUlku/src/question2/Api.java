@@ -20,8 +20,13 @@ API'ın en genel tanımı bu olmakla birlikte genel olarak ve bu çalışmamız 
 Postman bir API platformudur. API geliştirmek , test etmek ve/veya hazır bir API kullanımı için gerekli 
 isteklerde bulunabileceğimiz bir uygulamadır. 
 Insomnia REST Client, HTTPie gibi alternatifleri de bulunmasına karşın en çok kullanılan API aracıdır.
-
-
+***********************************
+İstemci isteği gönderen, sunucu da ilgili cevabı veren durumundadır. Birbirlerinin sorumluluk alanlarına girmezler. 
+Birbirlerinden bağımsız programlama dilleri ve teknolojiler kullanabilirler.
+REST mimarisinin prensiplerinden ilki istemci - sunucu çalışma modelidir. 
+Biz bir istekte bulunuruz ve sunucu isteğimize karşılık olan durumu (state) bize bir sunum (presentation) olarak gönderir. 
+HTTP protokolü burada bu sunum transferi için kurulan iletişimin kurallarını belirler. 
+REST mimarisine uygun API'ların neredeyse tamamında HTTP protokolü kullanılır.
 kaynak:https://app.patika.dev/courses/rest-api/rest-api-nedir
 
 
