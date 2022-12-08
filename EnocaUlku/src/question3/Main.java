@@ -15,6 +15,8 @@ yansıtırsınız.
 ********************************************************
 *html ve js kodlarıyla sağlayabiliriz.
 *
+*<meta http-equiv="refresh" content="10">
+
 *
 Java Server Pages’de otomatik yenileme işlemi aşağıdaki kod bloğu ile olmakta.
 <%response.setIntHeader("Refresh", 1);  %>

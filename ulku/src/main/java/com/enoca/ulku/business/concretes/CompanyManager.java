@@ -57,7 +57,10 @@ public class CompanyManager implements CompanyService{
 
 	@Override
 	public void delete(DeleteCompanyRequest deleteCompanyRequest) {
-		// TODO Auto-generated method stub
+		Company company = new Company();
+
+		company.setId(deleteCompanyRequest.getId());
+		companyRepository.delete(company);
 		
 	}
 
