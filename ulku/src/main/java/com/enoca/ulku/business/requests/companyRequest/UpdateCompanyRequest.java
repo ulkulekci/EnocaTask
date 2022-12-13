@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 public class UpdateCompanyRequest {
-	private int id;
+	
 	private String name;
 }

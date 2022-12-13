@@ -1,17 +1,16 @@
 package com.enoca.ulku.business.responses.employeeResponse;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class UpdateEmployeeResponse {
    
 	private int id;
+    private int CompanyId;
     private String name;
-    private int companyId;
 }

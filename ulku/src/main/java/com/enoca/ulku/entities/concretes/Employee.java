@@ -1,8 +1,8 @@
 package com.enoca.ulku.entities.concretes;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +28,9 @@ public class Employee {
     private int id;
     private String name;	    
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "companies_id")
+    
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
+   
 }
