@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.enoca.ulku.entities.concretes.Company;
 
 public interface CompanyRepository extends JpaRepository<Company,Integer> {
-	 boolean existsByName(String name);
- 
+	boolean existsByNameContainingIgnoreCase(String name);
+	boolean existsById(int id);
 }

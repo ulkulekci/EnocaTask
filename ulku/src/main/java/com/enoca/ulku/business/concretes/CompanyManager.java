@@ -1,95 +1,80 @@
 package com.enoca.ulku.business.concretes;
 
 import java.util.List;
+import java.util.Objects;
+
 import org.springframework.stereotype.Service;
 
 import com.enoca.ulku.business.abstracts.CompanyService;
-import com.enoca.ulku.business.constants.Message;
 import com.enoca.ulku.business.mappers.CompanyMapper;
 import com.enoca.ulku.business.requests.companyRequest.CreateCompanyRequest;
 import com.enoca.ulku.business.requests.companyRequest.UpdateCompanyRequest;
 import com.enoca.ulku.business.responses.companyResponse.CreateCompanyResponse;
 import com.enoca.ulku.business.responses.companyResponse.GetAllCompanyResponse;
-import com.enoca.ulku.business.responses.companyResponse.GetCompanyResponse;
 import com.enoca.ulku.business.responses.companyResponse.UpdateCompanyResponse;
 import com.enoca.ulku.dataAccess.CompanyRepository;
 import com.enoca.ulku.entities.concretes.Company;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Service
 public class CompanyManager implements CompanyService{
-	
     CompanyRepository companyRepository;
-    CompanyMapper companymapper;
-    
+    CompanyMapper mapper;
 
 	@Override
 	public List<GetAllCompanyResponse> getAll() {
-		List<Company> Companies =companyRepository.findAll();
-        return companymapper.toGetAllCompanyResponse(Companies);
-	}
-
-
-	@Override
-	public GetCompanyResponse getById(int id) {
-		Company company = companyRepository.findById(id).get();
-        return companymapper.toGetCompanyResponse(company);
+		List<Company> Companies = companyRepository.findAll();
+        return mapper.toGetAllCompanyResponse(Companies);
 	}
 
 
 	@Override
 	public CreateCompanyResponse create(CreateCompanyRequest request) {
-		Company company = companymapper.toCompany(request);
-        if (checkCompanyNameValid(company)) {
-            throw new RuntimeException(Message.COMPANY_NAME_IS_NOT_VALID);
-        }
-
-        if (isCompanyExists(company)) {
-            throw new RuntimeException(Message.COMPANY_ALREADY_EXISTS);
-        }
-
+		checkIfNameDuplicated(request.getName());
+		checkIfNameIsEmptyOrNull(request.getName());
+		Company company = mapper.toCompany(request);
         companyRepository.save(company);
-
-        return companymapper.toCreateCompanyResponse(company);
+        return mapper.toCreateCompanyResponse(company);
 	}
 
 
 	@Override
 	public UpdateCompanyResponse update(UpdateCompanyRequest request, int id) {
+		checkIfIdExists(id);
+		checkIfNameDuplicated(request.getName());
+		checkIfNameIsEmptyOrNull(request.getName());
 		Company company = companyRepository.findById(id).get();
-		companymapper.update(company, request);
-
-        if (checkCompanyNameValid(company)) {
-            throw new RuntimeException(Message.COMPANY_NAME_IS_NOT_VALID);
-        }
-
-        if (isCompanyExists(company)) {
-            throw new RuntimeException(Message.COMPANY_ALREADY_EXISTS);
-        }
-
+		mapper.update(company, request);
         companyRepository.save(company);
-
-        return companymapper.toUpdateCompanyResponse(company);
+        return mapper.toUpdateCompanyResponse(company);
 	}
 
 
 	@Override
 	public void delete(int id) {
+		checkIfIdExists(id);
 		companyRepository.deleteById(id);
 		
 	}
-	public boolean isCompanyExists(Company company) {
-		return companyRepository.existsByName(company.getName());
+	private void checkIfIdExists(int id) {
+		if(!this.companyRepository.existsById(id)) {
+			throw new RuntimeException("Id does not exist");
+		}
+    }
+	private void checkIfNameDuplicated(String name){
+		if(this.companyRepository.existsByNameContainingIgnoreCase(name)) {
+			throw new RuntimeException("Name already exists");
+		}
+	}
+
+	private void checkIfNameIsEmptyOrNull(String name){
+		if(name.isBlank() || name.isEmpty() || Objects.isNull(name)) {
+			throw new RuntimeException("Name cannot be null or empty");
+		}
 	}
 
 
-	public boolean checkCompanyNameValid(Company company) {
-		return company.getName().isEmpty() || company.getName().isBlank();
-	}
-
-	
 }

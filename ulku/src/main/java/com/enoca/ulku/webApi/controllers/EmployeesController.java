@@ -18,42 +18,39 @@ import com.enoca.ulku.business.requests.employeeRequest.CreateEmployeeRequest;
 import com.enoca.ulku.business.requests.employeeRequest.UpdateEmployeeRequest;
 import com.enoca.ulku.business.responses.employeeResponse.CreateEmployeeResponse;
 import com.enoca.ulku.business.responses.employeeResponse.GetAllEmployeeResponse;
-import com.enoca.ulku.business.responses.employeeResponse.GetEmployeeResponse;
 import com.enoca.ulku.business.responses.employeeResponse.UpdateEmployeeResponse;
 
 @RestController 
 @RequestMapping("/api/employees")
 public class EmployeesController {
-    private final EmployeeService employeeservice;
-    
-	public EmployeesController(EmployeeService employeeservice) {
-		this.employeeservice = employeeservice;
-	}
-    @GetMapping(name = "GetAllEmployees")
+    private final EmployeeService employeeService;
+
+    public EmployeesController( EmployeeService employeeService){
+       this.employeeService=  employeeService;
+    }
+
+
+
+    @GetMapping("GetAllEmployees")
     public List<GetAllEmployeeResponse> getAll() {
-        return employeeservice.getAll();
+        return employeeService.getAll();
     }
 
-    @GetMapping(name = "GetEmployeeById", path = "/{id}")
-    public GetEmployeeResponse getById(@PathVariable int id) {
-        return employeeservice.getById(id);
-    }
-
-    @PostMapping(name = "CreateEmployee")
+    @PostMapping(name = "CreateEmployee",path = ("/add"))
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreateEmployeeResponse create(@RequestBody CreateEmployeeRequest employee) {
-        return employeeservice.create(employee);
+        return employeeService.create(employee);
     }
 
-    @PutMapping(name = "UpdateEmployee", path = "/{id}")
+    @PutMapping(name = "UpdateEmployee", path = "/update{id}")
     public UpdateEmployeeResponse update(@RequestBody UpdateEmployeeRequest employee, @PathVariable int id) {
-        return employeeservice.update(employee, id);
+        return employeeService.update(employee, id);
     }
 
-    @DeleteMapping(name = "DeleteEmployee", path = "/{id}")
+    @DeleteMapping(name = "DeleteEmployee", path = "/delete{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-    	employeeservice.delete(id);
+        employeeService.delete(id);
     }
     
 }

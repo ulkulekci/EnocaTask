@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCompanyResponse {
-	private int id;   
+	  private int id;
 	  private String name;
 	  private List<EmployeeResponse> employees;
 }

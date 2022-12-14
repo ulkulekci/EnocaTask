@@ -5,5 +5,6 @@ import com.enoca.ulku.entities.concretes.Employee;
 
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer>{
-	 boolean existsByName(String name);
+	boolean existsByNameContainingIgnoreCase(String name);
+	boolean existsById(int id);
 }
